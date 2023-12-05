@@ -9,12 +9,12 @@
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<title>NobleUI - HTML Bootstrap 5 Admin Dashboard Template</title>
+	<title>Login</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <!-- End fonts -->
 
 	<!-- core:css -->
@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="{{ asset('admin/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
 	<!-- endinject -->
 
-  <!-- Layout styles -->  
+  <!-- Layout styles -->
 	<link rel="stylesheet" href="{{ asset('admin/assets/css/demo2/style.css') }}">
   <!-- End layout styles -->
 
@@ -55,14 +55,29 @@
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="#" class="noble-ui-logo logo-light d-block mb-2">Noble<span>UI</span></a>
                     <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
-                    <form class="forms-sample">
+                    <form class="forms-sample" action="{{ route('admin.auth') }}" method="POST">
+                        @csrf
+
                       <div class="mb-3">
-                        <label for="userEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="userEmail" placeholder="Email">
+                        <label for="userEmail" class="form-label">Username</label>
+                        <input type="text"
+                               class="form-control @error('username') is-invalid @enderror"
+                               id="userEmail"
+                               name="username" >
+                          @error('username')
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                       </div>
+
                       <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="userPassword" autocomplete="current-password" placeholder="Password">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                               id="userPassword"
+                               name="password"
+                               autocomplete="current-password" >
+                          @error('password')
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                       </div>
                       <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="authCheck">
@@ -71,13 +86,13 @@
                         </label>
                       </div>
                       <div>
-                        <a href="../../dashboard.html" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</a>
-                        <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
-                          <i class="btn-icon-prepend" data-feather="twitter"></i>
-                          Login with twitter
+
+                        <button type="submit" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                          <i class="btn-icon-prepend" data-feather="log-in"></i>
+                          Login
                         </button>
                       </div>
-                      <a href="register.html" class="d-block mt-3 text-muted">Not a user? Sign up</a>
+                      <a href="" class="d-block mt-3 text-muted">Not a user? Sign up</a>
                     </form>
                   </div>
                 </div>
